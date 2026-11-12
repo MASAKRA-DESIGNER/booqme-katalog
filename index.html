@@ -185,14 +185,34 @@ footer{padding:28px var(--edge) 40px;font-size:12px;color:var(--g4);display:flex
 @media (max-width:720px){.gal img{height:160px}.d-wrap{padding-top:16px}}
 @media (max-width:720px){
   .hero{padding-top:30px}
-  .search{grid-template-columns:1fr}
-  .search .pill{display:none}
   .grid{grid-template-columns:1fr}
   .brand .tag{display:none}
   .top .pill.line{display:none}
   .d-actions .pill.blue{display:none}
   .sticky-cta{display:flex}
   .rv{grid-template-columns:1fr}
+}
+
+/* centered hero v2 */
+.hero{text-align:center;padding:clamp(72px,12vh,140px) var(--edge) 28px;display:flex;flex-direction:column;align-items:center}
+.hero h1{font-size:clamp(40px,7.5vw,76px);margin:20px 0 14px}
+.hero .lead{margin:0 auto}
+.search{margin:40px auto 0;width:100%;max-width:780px;display:flex;align-items:center;gap:0;background:#fff;border:1px solid var(--g2);border-radius:999px;padding:6px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 12px 32px -14px rgba(16,24,40,.16);transition:box-shadow .2s,border-color .2s}
+.search:focus-within{border-color:var(--blue);box-shadow:0 0 0 4px var(--lb),0 12px 32px -14px rgba(16,24,40,.16)}
+.search .field{background:transparent;border:0;height:52px;border-radius:999px}
+.search .field:focus-within{background:transparent;border:0}
+.search #qf{flex:1;min-width:0}
+.search .field.city{flex:none;width:210px;border-left:1px solid var(--g1);border-radius:0}
+.search .pill{height:52px;padding:0 28px;font-size:15px;flex:none}
+.cats{justify-content:center;flex-wrap:wrap;padding:22px var(--edge) 8px;max-width:1100px;margin:0 auto}
+.hero-wrap{border-bottom:1px solid var(--g0);margin-bottom:8px;padding-bottom:clamp(40px,7vh,80px)}
+@media (max-width:720px){
+  .hero{padding-top:56px}
+  .search{flex-direction:column;align-items:stretch;border-radius:16px;padding:4px}
+  .search #qf{flex:none}
+  .search .field.city{width:auto;border-left:0;border-top:1px solid var(--g1)}
+  .search .pill{display:flex;margin:4px;height:48px}
+  .cats{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto}
 }
 </style>
 </head>
@@ -208,17 +228,19 @@ footer{padding:28px var(--edge) 40px;font-size:12px;color:var(--g4);display:flex
 </header>
 
 <main id="list">
+  <div class="hero-wrap">
   <section class="hero">
     <span class="eyebrow"><span class="ms fill" style="font-size:16px">verified</span><span id="eyebrow"></span></span>
     <h1>Nájdi. <em>Rezervuj.</em></h1>
     <p class="lead">Barberi, kozmetika, nechty, masáže a ďalšie služby. Každá prevádzka má online rezerváciu cez booqme.</p>
     <form class="search" id="sform" autocomplete="off">
       <label class="field" id="qf"><span class="ms">search</span><input id="q" type="search" placeholder="Napr. fade, gél lak, masáž…" enterkeyhint="search"><span class="ms clear" id="qx">close</span></label>
-      <label class="field"><span class="ms">location_on</span><select id="city"></select><span class="ms chev">expand_more</span></label>
+      <label class="field city"><span class="ms">location_on</span><select id="city"></select><span class="ms chev">expand_more</span></label>
       <button class="pill blue" type="submit">Hľadať</button>
     </form>
   </section>
   <nav class="cats" id="cats"></nav>
+  </div>
   <div class="bar">
     <div class="count" id="count"></div>
     <label class="sort">Zoradiť <select id="sort">
