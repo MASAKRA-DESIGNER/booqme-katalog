@@ -300,7 +300,7 @@ function coverHTML(v, minShow, isHit){
 function ratingHTML(v){
   return v.rating
     ? `<div class="rate"><span class="ms fill">star</span>${rateTxt(v.rating)} <small>(${fmtN(v.reviews)} ${reviewsWord(v.reviews)})</small></div>`
-    : `<div class="rate none"><span class="ms">star</span>Zatiaľ bez hodnotení</div>`;
+    : `<div class="rate none"><span class="ms">star</span>V booqme zatiaľ bez hodnotení</div>`;
 }
 function hl(text, terms){
   let t = esc(text);
@@ -432,7 +432,7 @@ function openDetail(slug){
       <div class="rv">
         ${v.rating?`<div><div class="rv-big">${rateTxt(v.rating)}</div><div class="stars">${stars}</div></div>
         <div><p><b style="color:var(--ink)">${fmtN(v.reviews)} ${reviewsWord(v.reviews)}</b> od zákazníkov v rezervačnom systéme booqme.</p>`
-        :`<div><div class="rv-big" style="color:var(--g3)">–</div></div><div><p>Prevádzka zatiaľ nemá hodnotenia v booqme.</p>`}
+        :`<div><div class="rv-big" style="color:var(--g3)"><span class="ms" style="font-size:44px">reviews</span></div></div><div><p>V booqme ju zákazníci zatiaľ nehodnotili. Recenzie od zákazníkov nájdeš na Google.</p>`}
           <div class="rv-links"><a class="pill grey sm" href="${google}" target="_blank" rel="noopener"><span class="ms">open_in_new</span>Google recenzie</a>
           <a class="pill grey sm" href="${BOOK(v.slug)}" target="_blank" rel="noopener"><span class="ms">open_in_new</span>Recenzie v booqme</a></div>
         </div>
