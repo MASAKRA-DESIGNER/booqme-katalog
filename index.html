@@ -214,6 +214,10 @@ footer{padding:28px var(--edge) 40px;font-size:12px;color:var(--g4);display:flex
   .search .pill{display:flex;margin:4px;height:48px}
   .cats{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto}
 }
+
+.svc.hit{margin-top:14px;border-top:1px solid var(--g0)}
+.c-foot{gap:8px}
+.c-foot .pill{flex:1}
 </style>
 </head>
 <body>
@@ -384,9 +388,9 @@ function render(){
     return;
   }
   $('grid').innerHTML = list.map(({v,svc})=>{
-    let rows = svc.length ? svc.slice(0,3).map(i=>v.services[i]) : v.services.filter(x=>x.p>0).slice(0,3);
-    const rest = (svc.length||v.services.length) - rows.length;
-    const minShow = svc.length ? Math.min(...svc.map(i=>v.services[i].p).filter(p=>p>0).concat([v.min||0]).filter(Boolean)) : v.min;
+    let rows = svc.slice(0,2).map(i=>v.services[i]);
+    const rest = svc.length - rows.length;
+    const hp = svc.map(i=>v.services[i].p).filter(p=>p>0); const minShow = svc.length && hp.length ? Math.min(...hp) : v.min;
     return `<article class="card has-cover" data-s="${v.slug}" tabindex="0">
       ${coverHTML(v, minShow, !!svc.length)}
       <div class="c-body">
@@ -395,11 +399,10 @@ function render(){
         <div class="c-meta"><span class="ms">location_on</span>${esc(v.city)}${v.district?', '+esc(v.district):''} · ${esc(CATS[v.cat].l)}</div>
         ${ratingHTML(v)}
       </div>
-      <p class="c-desc">${esc(v.desc)}</p>
-      <ul class="svc">${rows.map(x=>`<li><span>${hl(x.n,terms)}</span><b>${x.from&&x.p?'od ':''}${eur(x.p)}</b></li>`).join('')}
-        ${rest>0?`<li class="more"><span>${svc.length?`+ ďalšie ${rest} zhody`:`+ ďalších ${rest} služieb`}</span><span class="ms">chevron_right</span></li>`:''}</ul>
+      ${svc.length?`<ul class="svc hit">${rows.map(x=>`<li><span>${hl(x.n,terms)}</span><b>${x.from&&x.p?'od ':''}${eur(x.p)}</b></li>`).join('')}
+        ${rest>0?`<li class="more"><span>+ ďalšie ${rest} ${rest===1?'zhoda':(rest<=4?'zhody':'zhôd')}</span><span class="ms">chevron_right</span></li>`:''}</ul>`:''}
       <div class="c-foot">
-        <div class="from">${svc.length?'hľadaná služba od':'služby od'}<b>${minShow?eur(minShow):'na vyžiadanie'}</b></div>
+        <span class="pill line sm">Detail</span>
         <a class="pill blue sm" href="${BOOK(v.slug)}" target="_blank" rel="noopener" data-book>Rezervovať</a>
       </div>
       </div>
